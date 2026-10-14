@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To-Do List</title>
   <style>
+    /* General Styles */
     body {
       font-family: Arial, sans-serif;
       background-color: #f4f4f9;
@@ -26,7 +27,8 @@
 
     .navbar h1 {
       margin: 0;
-      font-size: 20px;
+      font-size: 24px;
+      font-weight: bold;
     }
 
     .navbar ul {
@@ -44,10 +46,11 @@
       color: white;
       text-decoration: none;
       font-size: 16px;
+      transition: color 0.3s ease;
     }
 
     .navbar ul li a:hover {
-      text-decoration: underline;
+      color: #ffdd57;
     }
 
     /* Color Bar */
@@ -62,20 +65,29 @@
       justify-content: center;
       align-items: center;
       height: calc(100vh - 60px);
-      /* Adjust height to account for navbar and color bar */
+      /* Adjust height for navbar and color bar */
+      padding: 20px;
     }
 
     .todo-container {
       background: #fff;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 350px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .todo-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     }
 
     h1 {
       text-align: center;
       color: #333;
+      font-size: 28px;
+      margin-bottom: 20px;
     }
 
     .input-container {
@@ -87,20 +99,31 @@
       flex: 1;
       padding: 10px;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    #task-input:focus {
+      border-color: #007bff;
+      outline: none;
     }
 
     #add-task-btn {
-      padding: 10px;
+      padding: 10px 15px;
       background-color: #007bff;
       color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
+      font-size: 16px;
+      margin-left: 10px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     #add-task-btn:hover {
       background-color: #0056b3;
+      transform: scale(1.05);
     }
 
     #task-list {
@@ -114,79 +137,5 @@
       align-items: center;
       padding: 10px;
       border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-bottom: 10px;
-    }
-
-    #task-list li .completed {
-      text-decoration: line-through;
-      color: #888;
-    }
-
-    .delete-btn {
-      background-color: #ff4d4d;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-
-    .delete-btn:hover {
-      background-color: #cc0000;
-    }
-  </style>
-</head>
-
-<body>
-  <!-- Navigation Bar -->
-  <div class="navbar">
-    <h1>To-Do App</h1>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </div>
-
-  <!-- Color Bar -->
-  <div class="color-bar"></div>
-
-  <!-- Main Content -->
-  <div class="main-container">
-    <div class="todo-container">
-      <h1>To-Do List</h1>
-      <div class="input-container">
-        <input type="text" id="task-input" placeholder="Add a new task...">
-        <button id="add-task-btn">Add</button>
-      </div>
-      <ul id="task-list"></ul>
-    </div>
-  </div>
-
-  <script>
-    const taskInput = document.getElementById('task-input');
-    const addTaskBtn = document.getElementById('add-task-btn');
-    const taskList = document.getElementById('task-list');
-
-    addTaskBtn.addEventListener('click', () => {
-      const taskText = taskInput.value.trim();
-      if (taskText) {
-        const li = document.createElement('li');
-        li.innerHTML = `<span>${taskText}</span><button class="delete-btn">X</button>`;
-        taskList.appendChild(li);
-        taskInput.value = '';
-
-        li.querySelector('.delete-btn').addEventListener('click', () => {
-          li.remove();
-        });
-
-        li.querySelector('span').addEventListener('click', () => {
-          li.querySelector('span').classList.toggle('completed');
-        });
-      }
-    });
-  </script>
-</body>
-
-</html>
+      border-radius: 8px;
+      margin-bottom:
