@@ -11,10 +11,52 @@
       background-color: #f4f4f9;
       margin: 0;
       padding: 0;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    .navbar ul li {
+      margin-left: 20px;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .navbar ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Main Content */
+    .main-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      height: calc(100vh - 50px);
+      /* Adjust height to account for navbar */
     }
 
     .todo-container {
@@ -68,8 +110,6 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       margin-bottom: 10px;
-      opacity: 0;
-      animation: fadeIn 0.5s forwards;
     }
 
     #task-list li .completed {
@@ -89,41 +129,30 @@
     .delete-btn:hover {
       background-color: #cc0000;
     }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeOut {
-      from {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      to {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-    }
   </style>
 </head>
 
 <body>
-  <div class="todo-container">
-    <h1>To-Do List</h1>
-    <div class="input-container">
-      <input type="text" id="task-input" placeholder="Add a new task...">
-      <button id="add-task-btn">Add</button>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <h1>To-Do App</h1>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <div class="todo-container">
+      <h1>To-Do List</h1>
+      <div class="input-container">
+        <input type="text" id="task-input" placeholder="Add a new task...">
+        <button id="add-task-btn">Add</button>
+      </div>
+      <ul id="task-list"></ul>
     </div>
-    <ul id="task-list"></ul>
   </div>
 
   <script>
@@ -140,8 +169,7 @@
         taskInput.value = '';
 
         li.querySelector('.delete-btn').addEventListener('click', () => {
-          li.style.animation = 'fadeOut 0.5s forwards';
-          li.addEventListener('animationend', () => li.remove());
+          li.remove();
         });
 
         li.querySelector('span').addEventListener('click', () => {
